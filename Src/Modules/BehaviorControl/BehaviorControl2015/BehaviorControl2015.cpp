@@ -13,7 +13,6 @@
 #define INTELLISENSE_PREFIX Behavior2015::Behavior::
 #endif
 #include "Tools/Cabsl.h" // include last, because macros might mix up other header files
-#include <iostream>
 namespace Behavior2015
 {
   /**
