@@ -4,8 +4,8 @@ This is a module developed by [MRL-SPL](http://mrl-spl.ir) team based on [B-Huma
 This module is mainly inspired by the "Positioning to Win" method at [Robocup Simulation3D league](http://http://robocup.org/leagues/23).
 It calculates optimal assignment of tasks to a team of robots in a distributed setting.   
 
-[![Demo](https://j.gifs.com/qYLR5G.gif)](https://youtu.be/gA6PGvBHR9w)
-> You can watch the video at [youtube](https://youtu.be/gA6PGvBHR9w).
+[![Demo](https://j.gifs.com/qYLR5G.gif)](https://youtu.be/_tgjlt1_-wE)
+> You can watch the video at [youtube](https://youtu.be/_tgjlt1_-wE).
 
 
 ## Requirements
@@ -31,7 +31,7 @@ Config/Locations/Default/modules.cfg
     
       ```{representation = AgentTask; provider = TaskAssignment;}```
 
-### git submodule
+### Git submodule
 1. Add submodule to your current B-Human project
 
     ```git submodule add [path to this repo] [sub dir]```
@@ -60,7 +60,7 @@ A simple example has written in ```Src/BehaviorControl/BehaviorControl2015/Behav
 
 To enable debug drawings of the module on worldState fieldview, enter following command in SimRobot's console:
     
-    vfd worlState module:TaskAssignment on
+    vfd worldState module:TaskAssignment on
 
 Following screenshot demonstrates the assignments in 
 the Playing state of the game with black dots (formation points) and the red 
@@ -73,8 +73,8 @@ lines representing the assigned position for each agent. LD: Leader and SUP: Sup
     
 For changing the formations, go to ```Config/Formations``` and run PlanEditor
 
-[![Plan Editor](https://j.gifs.com/nr6QW4.gif)](https://youtu.be/lHQWDaZeDZI)
-> Learn more about [PlanEditor](http://github.com/ArefMq/VoronoiGridEditor)
+[![Plan Editor](https://j.gifs.com/nr6QW4.gif)](https://youtu.be/bSx54TL0GPs)
+> Learn more about [PlanEditor](http://github.com/alipiry/PlanEditor)
 
 
 ## Authors
