@@ -31,6 +31,7 @@ Add AgentTask as representation and TaskAssignment as provider to modules.cfg
 ## Running
 
 Make the code and run it as instructed in B-Human coderelease
+
 Note: players list in Config/Locations/Default/taskAssignment.cfg file must sync with the number of players in the game
 
 ## Usage
