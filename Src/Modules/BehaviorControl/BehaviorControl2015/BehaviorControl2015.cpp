@@ -13,7 +13,7 @@
 #define INTELLISENSE_PREFIX Behavior2015::Behavior::
 #endif
 #include "Tools/Cabsl.h" // include last, because macros might mix up other header files
-
+#include <iostream>
 namespace Behavior2015
 {
   /**
@@ -67,45 +67,70 @@ class BehaviorControl2015 : public BehaviorControl2015Base
 
   void update(ActivationGraph& activationGraph)
   {
-    Parameters p(parameters); // make a copy, to make "unchanged" work
-    MODIFY("parameters:BehaviorControl2015", p);
-    if(theFrameInfo.time)
-    {
-    	/*Update every robot role  */
-    	if(theRobotInfo.number == 1)
-    		theBehaviorStatus.role = Role::goalKeeper;
-    	else if(theAgentTask.getRole() == AgentTask::Leader)
-    		theBehaviorStatus.role = Role::Leader;
-    	else if(theAgentTask.getRole() == AgentTask::Supporter)
-    		theBehaviorStatus.role = Role::Supporter;
-    	else if(theAgentTask.getRole() == AgentTask::None)
-    		theBehaviorStatus.role = Role::none;
 
-      theSPLStandardBehaviorStatus.walkingTo  = theRobotPose.translation;
-      theSPLStandardBehaviorStatus.shootingTo = theRobotPose.translation;
+	  Parameters p(parameters); // make a copy, to make "unchanged" work
+	  MODIFY("parameters:BehaviorControl2015", p);
+	  if(theFrameInfo.time)
+	  {
+		  if(theGameInfo.getStateAsString() == "Initial" )
+			  theMotionRequest.motion = MotionRequest::stand;
+		  else
+		  {
+			  /* Update robot roles */
+			  if(theRobotInfo.number == 1)
+				  theBehaviorStatus.role = Role::goalKeeper;
+			  else if(theAgentTask.getRole() == AgentTask::Leader)
+				  theBehaviorStatus.role = Role::Leader;
+			  else if(theAgentTask.getRole() == AgentTask::Supporter)
+				  theBehaviorStatus.role = Role::Supporter;
+			  else if(theAgentTask.getRole() == AgentTask::None)
+				  theBehaviorStatus.role = Role::none;
 
-      /*Check whether the robot is Leader or not
-       * if the robot is Leader, searches for the ball and goes for it
-       * if the robot is not Leader, gets the position from the current formation that loaded and goes to that position
-       * */
-      if(theBehaviorStatus.role == Role::Leader)
-    	  theBehavior->execute(p.roots);
-      else
-      {
-    	  Vector2f playerPose = theAgentTask.getCurrentVoronoiPose();
-    	  playerPose = theRobotPose.inversePose * playerPose;
+			  theSPLStandardBehaviorStatus.walkingTo  = theRobotPose.translation;
+			  theSPLStandardBehaviorStatus.shootingTo = theRobotPose.translation;
 
-    	  theMotionRequest.motion = MotionRequest::walk;
-    	  theMotionRequest.walkRequest.mode = WalkRequest::targetMode;
-    	  theMotionRequest.walkRequest.target = Pose2f(playerPose);
-    	  theMotionRequest.walkRequest.speed = Pose2f(1,1,1);
-    	  theSPLStandardBehaviorStatus.walkingTo = playerPose;
-      }
+			  /* Check whether the robot is Leader or not
+			   * if the robot is Leader, search for the ball and go for it
+			   * if the robot is not Leader, get the position from current formation and go to that position
+			   */
+			  if(theBehaviorStatus.role == Role::Leader)
+				  theBehavior->execute(p.roots);
+			  else
+			  {
+				  Vector2f playerPose = theAgentTask.getCurrentVoronoiPose();
+				  playerPose = theRobotPose.inversePose * playerPose;
 
-      theSPLStandardBehaviorStatus.intention = DROPIN_INTENTION_DEFAULT;
-      if(theSideConfidence.confidenceState == SideConfidence::CONFUSED)
-        theSPLStandardBehaviorStatus.intention = DROPIN_INTENTION_LOST;
-    }
+				  theMotionRequest.motion = MotionRequest::walk;
+				  theMotionRequest.walkRequest.mode = WalkRequest::targetMode;
+				  theMotionRequest.walkRequest.target = Pose2f(playerPose);
+				  theMotionRequest.walkRequest.speed = Pose2f(1,1,1);
+				  theSPLStandardBehaviorStatus.walkingTo = playerPose;
+			  }
+			  /* Robot roles debug with LEDs */
+			  switch (theAgentTask.getRole())
+			  {
+			  case AgentTask::Leader:
+				  theBehaviorLEDRequest.rightEyeColor = BehaviorLEDRequest::red;
+				  break;
+			  case AgentTask::Supporter:
+				  theBehaviorLEDRequest.rightEyeColor = BehaviorLEDRequest::green;
+				  break;
+			  case AgentTask::Defender:
+				  theBehaviorLEDRequest.rightEyeColor = BehaviorLEDRequest::blue;
+				  break;
+			  case AgentTask::GoalKeeper:
+				  theBehaviorLEDRequest.rightEyeColor = BehaviorLEDRequest::white;
+				  break;
+			  case AgentTask::None:
+				  theBehaviorLEDRequest.rightEyeColor = BehaviorLEDRequest::yellow;
+				  break;
+			  }
+
+			  theSPLStandardBehaviorStatus.intention = DROPIN_INTENTION_DEFAULT;
+			  if(theSideConfidence.confidenceState == SideConfidence::CONFUSED)
+				  theSPLStandardBehaviorStatus.intention = DROPIN_INTENTION_LOST;
+		  }
+	  }
   }
 
   /** Update the behavior led request by copying it from the behavior */
