@@ -2,7 +2,7 @@
 ----
 This is a module developed by [MRL-SPL](http://mrl-spl.ir) team based on [B-Human](http://b-human.de) framework 2016.
 This module is mainly inspired by the "Positioning to Win" method at [Robocup Simulation3D league](http://http://robocup.org/leagues/23).
-It calculates optimal assignment of tasks to team of robots in a distributed setting.   
+It calculates optimal assignment of tasks for a team of robots in a distributed setting.   
 
 [![Demo](https://j.gifs.com/qYLR5G.gif)](https://youtu.be/gA6PGvBHR9w)
 > You can watch the video at [youtube](https://youtu.be/gA6PGvBHR9w).
@@ -15,11 +15,12 @@ You need to get [B-Human](http://github.com/bhuman/BHumanCodeRelease) code relea
     git clone git@github.com:bhuman/BHumanCodeRelease.git
     git checkout coderelease2016
 
-### Installation
+## Installation
 
+### Copy
 1. Get Game Planner code
 
-    git clone git@github.com:novinsh/GamePlanner.git
+    git clone [path to this repo] [sub dir]
 
 2. Copy GamePlanner files to B-Human code (Src and Config directories).
 
@@ -27,6 +28,21 @@ You need to get [B-Human](http://github.com/bhuman/BHumanCodeRelease) code relea
 Config/Locations/Default/modules.cfg
     
       {representation = AgentTask; provider = TaskAssignment;}
+
+### git submodule
+1. Add submodule to your current B-Human project
+
+    git submodule add [path to this repo] [sub dir]
+
+2. Run the ```setup.sh``` inside the fetched submodule. This will create a symbolic
+link to the submodule automatically.
+ 
+3. Add AgentTask as representation and TaskAssignment as provider to 
+Config/Locations/Default/modules.cfg
+    
+      {representation = AgentTask; provider = TaskAssignment;}
+
+Learn more about git [submodule](https://github.com/NebuPookins/git-submodule-tutorial)
 
 ## Running
 
