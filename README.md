@@ -2,7 +2,7 @@
 ----
 This is a module developed by [MRL-SPL](http://mrl-spl.ir) team based on [B-Human](http://b-human.de) framework 2016.
 This module is mainly inspired by the "Positioning to Win" method at [Robocup Simulation3D league](http://http://robocup.org/leagues/23).
-It calculates optimal assignment of tasks for a team of robots in a distributed setting.   
+It calculates optimal assignment of tasks to a team of robots in a distributed setting.   
 
 [![Demo](https://j.gifs.com/qYLR5G.gif)](https://youtu.be/gA6PGvBHR9w)
 > You can watch the video at [youtube](https://youtu.be/gA6PGvBHR9w).
@@ -16,31 +16,33 @@ You need to get [B-Human](http://github.com/bhuman/BHumanCodeRelease) code relea
     git checkout coderelease2016
 
 ## Installation
+You can either use git submodule or simply copy the content of this repo to your
+own B-Human project.
 
 ### Copy
 1. Get Game Planner code
 
-    git clone [path to this repo] [sub dir]
+    ```git clone [path to this repo] [sub dir]```
 
 2. Copy GamePlanner files to B-Human code (Src and Config directories).
 
 3. Add AgentTask as representation and TaskAssignment as provider to 
 Config/Locations/Default/modules.cfg
     
-      {representation = AgentTask; provider = TaskAssignment;}
+      ```{representation = AgentTask; provider = TaskAssignment;}```
 
 ### git submodule
 1. Add submodule to your current B-Human project
 
-    git submodule add [path to this repo] [sub dir]
+    ```git submodule add [path to this repo] [sub dir]```
 
 2. Run the ```setup.sh``` inside the fetched submodule. This will create a symbolic
 link to the submodule automatically.
  
 3. Add AgentTask as representation and TaskAssignment as provider to 
-Config/Locations/Default/modules.cfg
+```Config/Locations/Default/modules.cfg```
     
-      {representation = AgentTask; provider = TaskAssignment;}
+      ```{representation = AgentTask; provider = TaskAssignment;}```
 
 Learn more about git [submodule](https://github.com/NebuPookins/git-submodule-tutorial)
 
@@ -48,9 +50,11 @@ Learn more about git [submodule](https://github.com/NebuPookins/git-submodule-tu
 
 Make the code and run it as instructed in B-Human coderelease
 
-Note: players list in ```Config/Locations/Default/taskAssignment.cfg``` file must sync with the number of players in the game
+Note: players list in ```Config/Locations/Default/taskAssignment.cfg``` 
+must correspond to the id of the players in the game. This is only used for the
+static post assignment.
 
-## Usage
+### Usage
 
 A simple example has written in ```Src/BehaviorControl/BehaviorControl2015/BehaviorControl2015.cpp``` to demonstrate the usage of the data provided by task assignment module
 
