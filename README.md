@@ -68,7 +68,7 @@ lines representing the assigned position for each agent. LD: Leader and SUP: Sup
 
 > Playing State Screenshot
 
-![alt example](http://piry.site/github/playingState.jpg "Playing State ScreenShot")
+![alt example](http://mrl-spl.ir/images/playingState.jpg "Playing State ScreenShot")
 
     
 For changing the formations, go to ```Config/Formations``` and run PlanEditor
