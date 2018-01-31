@@ -77,12 +77,6 @@ For changing the formations, go to ```Config/Formations``` and run PlanEditor
 > Learn more about [PlanEditor](http://github.com/alipiry/PlanEditor)
 
 
-## Authors
-
-* **[Novin Shahroudi](mailto:n.shahroudi@mrl-spl.ir)** 
-* **[Ali Piry](mailto:a.piry@mrl-spl.ir)** 
-
-
 ## License
 
 This project is licensed under the MIT License 
